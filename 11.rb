@@ -31,11 +31,13 @@ grid = [
 #What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 #puts grid.inspect
 max_product = 0
+grid_size = 20
 
 # check left->right products
 grid.each {|array|
   i = 0
   while (i+4 <= array.length)
+#    puts array.slice(i,4).inspect
     product = array.slice(i,4).inject {|term,product| term * product }
     max_product = (product > max_product) ? product : max_product 
     i += 1
@@ -54,7 +56,29 @@ while (i < grid[0].length)
   i += 1
 end
 
-# check diagonal products
+numbers = grid.inject {|collection,line| collection.concat(line) }
+
+# check forward diagonal products
+i=0
+while (i < numbers.length)
+  if ((i % grid_size)+3 < grid_size and i+(grid_size*3)+3 < numbers.length)
+    sequence = (0..3).to_a.map {|n| numbers[i+(grid_size*n)+n] }
+    product = sequence.inject {|product,number| product * number }
+  end
+  max_product = (product > max_product) ? product : max_product 
+  i += 1
+end
+
+# check backward diagonal products
+i=0
+while (i < numbers.length)
+  if ((i % grid_size)-3 >= 0 and i+(grid_size*3)-3 < numbers.length)
+    sequence = (0..3).to_a.map {|n| numbers[i+(grid_size*n)-n] }
+    product = sequence.inject {|product,number| product * number }
+  end
+  max_product = (product > max_product) ? product : max_product 
+  i += 1
+end
 
 puts max_product
 
