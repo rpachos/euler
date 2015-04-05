@@ -14,3 +14,31 @@
 # 
 # Which starting number, under one million, produces the longest chain?
 # NOTE: Once the chain starts the terms are allowed to go above one million.
+#
+# https://xkcd.com/710/
+
+def collatz(n)
+  sequence_length = 1
+  while(n > 1)
+    if n % 2 == 1
+      n = (n*3 + 1)
+    else
+      n = (n/2)
+    end
+    sequence_length += 1
+  end
+
+  return sequence_length
+end
+
+max = 0
+max_n = nil
+for n in (1..999_999)
+  len = collatz(n)
+  if len > max
+    max = len
+    max_n = n
+  end
+end
+
+puts max_n
