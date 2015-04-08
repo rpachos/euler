@@ -12,11 +12,13 @@ max_product=0
 adjacent_count=13
 i=0
 
+# chop the string into an array of digits for processing
 while ((c = sequence_string.slice(i,1)).length > 0)
   sequence.push(c.to_i)
   i += 1
 end
 
+# shift through the string checking the product of adjacent digits
 i = 0
 while ((adjacent = sequence.slice(i,adjacent_count)).length >= adjacent_count)
   product = adjacent.reduce {|product,term| product * term }
