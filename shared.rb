@@ -34,3 +34,14 @@ module Shared
     return true	
   end
 end
+
+class Integer
+  def factorial
+    if self == 1
+      return self
+    else
+      return self * (self - 1).factorial
+    end
+  end
+end
+

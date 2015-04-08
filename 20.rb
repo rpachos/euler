@@ -7,15 +7,6 @@
 #and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
 #
 #Find the sum of the digits in the number 100!
-
-class Integer
-  def factorial
-    if self == 1
-      return self
-    else
-      return self * (self - 1).factorial
-    end
-  end
-end
+require_relative 'shared'
 
 puts 100.factorial.to_s.chars.map {|digit| digit }.map {|char| char.to_i }.inject {|digit,sum| digit + sum }
